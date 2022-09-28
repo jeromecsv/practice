@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    args: ["--context=git://github.com/jeromecsv/kaniko-demo",
+           "--destination=froztfire/devops-toolkit:1.0.0"]
