@@ -6,5 +6,16 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    args: ["--context=git://github.com/jeromecsv/kaniko-demo",
-           "--destination=froztfire/devops-toolkit:1.0.0"]
+    args: ["--context=git://github.com/jeromecsv/practice",
+           "--destination=froztfire/practice/people:1.0.0"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: regcred
+        items:
+          - key: .dockerconfig.json
+            path: config.json
